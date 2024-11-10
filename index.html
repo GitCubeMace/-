@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ゴミ箱マップ</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="app.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <link rel="icon" href="logo.ico">
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css" />
+    <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>
+</head>
+<body class="background">
+    <header>
+        <img src="sutetainab!le_title.jpg" alt="Title Image" />
+    </header>
+    <div id="buttons">
+        <button onclick="locate()">現在地</button>
+        <button onclick="showGoogleMap()">Google Map</button>
+        <button onclick="showOpenStreetMap()">Open Street Map</button>
+        <button id="famimaButton" onclick="toggleMarkerSet(this, 'famima')" class="active">ファミマのマーカー</button>
+        <button id="lawsonButton" onclick="toggleMarkerSet(this, 'lawson')" class="active">ローソンのマーカー</button>
+        <button id="sevenElevenButton" onclick="toggleMarkerSet(this, 'sevenEleven')" class="active">セブンイレブンのマーカー</button>
+        <button onclick="showAllMarkers()">すべてのマーカー</button>
+    </div>
+    <button id="removeRouteButton" onclick="removeRoute()">× ルートを削除</button>
+    <div id="map"></div>
+    <script src="app.js"></script>
+</body>
+</html>
