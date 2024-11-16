@@ -14,11 +14,82 @@
     <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css" />
     <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        #map {
+            height: 80vh;
+            width: 100%;
+        }
+        #buttons {
+            margin: 10px;
+            display: flex;
+            gap: 5px;
+        }
+        #removeRouteButton {
+            margin: 10px;
+            display: none;
+        }
+        .background {
+            background: #f0f0f0;
+        }
+        /* ロゴアニメーションのスタイル */
+        #logoContainer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: white;
+            z-index: 9999;
+        }
+        svg path {
+            fill: none;
+            stroke: black;
+            stroke-width: 2;
+            stroke-dasharray: 600; /* 適宜調整 */
+            stroke-dashoffset: 600; /* 初期値: 線を非表示 */
+            animation: draw 2s ease-out forwards;
+        }
+        @keyframes draw {
+            to {
+                stroke-dashoffset: 0; /* 線が描かれる */
+            }
+        }
+        /* ロゴ終了後のフェードアウト */
+        #logoContainer.fade-out {
+            animation: fadeOut 1s forwards;
+        }
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+    </style>
 </head>
 <body class="background">
+    <!-- ロゴアニメーション -->
+    <div id="logoContainer">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+            <!-- 枠の丸 -->
+            <circle cx="100" cy="100" r="80" stroke="black" stroke-width="2" fill="none"></circle>
+            <!-- 丸の中に画像 -->
+            <image href="logo.jpg" x="60" y="60" width="80" height="80" clip-path="circle(40%)"></image>
+        </svg>
+    </div>
+    
+
+    <!-- ヘッダー -->
     <header>
         <img src="sutetainab!le_title.jpg" alt="Title Image" />
     </header>
+    <!-- ボタン -->
     <div id="buttons">
         <button onclick="locate()">現在地</button>
         <button onclick="showGoogleMap()">Google Map</button>
@@ -29,7 +100,17 @@
         <button onclick="showAllMarkers()">すべてのマーカー</button>
     </div>
     <button id="removeRouteButton" onclick="removeRoute()">× ルートを削除</button>
+    <!-- 地図表示 -->
     <div id="map"></div>
+    <script>
+        // ページ読み込み時にロゴを非表示にする
+        window.addEventListener("load", () => {
+            const logoContainer = document.getElementById("logoContainer");
+            setTimeout(() => {
+                logoContainer.classList.add("fade-out");
+            }, 2500); // ロゴアニメーションの時間に合わせる
+        });
+    </script>
     <script src="app.js"></script>
 </body>
 </html>
