@@ -48,17 +48,34 @@
             background: white;
             z-index: 9999;
         }
-        svg path {
-            fill: none;
+        #logoContainer svg {
+            width: 150px;
+            height: 150px;
+        }
+        svg circle {
             stroke: black;
             stroke-width: 2;
-            stroke-dasharray: 600; /* 適宜調整 */
-            stroke-dashoffset: 600; /* 初期値: 線を非表示 */
-            animation: draw 2s ease-out forwards;
+            fill: none;
+            animation: drawCircle 2s ease-out forwards;
         }
-        @keyframes draw {
+        svg image {
+            animation: fadeIn 2s ease-in forwards;
+        }
+        @keyframes drawCircle {
+            from {
+                stroke-dasharray: 500;
+                stroke-dashoffset: 500;
+            }
             to {
-                stroke-dashoffset: 0; /* 線が描かれる */
+                stroke-dashoffset: 0;
+            }
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
             }
         }
         /* ロゴ終了後のフェードアウト */
@@ -77,13 +94,12 @@
     <!-- ロゴアニメーション -->
     <div id="logoContainer">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-            <!-- 枠の丸 -->
-            <circle cx="100" cy="100" r="80" stroke="black" stroke-width="2" fill="none"></circle>
-            <!-- 丸の中に画像 -->
+            <!-- 丸枠 -->
+            <circle cx="100" cy="100" r="80"></circle>
+            <!-- 画像 -->
             <image href="logo.jpg" x="60" y="60" width="80" height="80" clip-path="circle(40%)"></image>
         </svg>
     </div>
-    
 
     <!-- ヘッダー -->
     <header>
